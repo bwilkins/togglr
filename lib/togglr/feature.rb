@@ -23,7 +23,7 @@ module Togglr
     def authorative_repository
       Togglr.configuration.authorative_repository.split('::').inject(Object) do |mod, name|
         mod.const_get(name)
-      end
+      end.new
     end
   end
 end
