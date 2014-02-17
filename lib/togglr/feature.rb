@@ -4,7 +4,7 @@ module Togglr
   class Feature
 
     def self.register_features
-      authorative_repository.features.each do |feature|
+      authoritative_repository.features.each do |feature|
         register_feature(feature)
       end
     end
@@ -20,8 +20,8 @@ module Togglr
       end
     end
 
-    def authorative_repository
-      Togglr.configuration.authorative_repository.split('::').inject(Object) do |mod, name|
+    def authoritative_repository
+      Togglr.configuration.authoritative_repository.split('::').inject(Object) do |mod, name|
         mod.const_get(name)
       end.new
     end
