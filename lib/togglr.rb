@@ -3,4 +3,21 @@
 require 'togglr/version'
 
 module Togglr
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.configure
+    yield(configuration) if block_given?
+  end
+
+  class Configuration
+    attr_accessor :yaml_repository_filename, :repositories, :authorative_repository
+
+    def initialize
+      @yaml_repository_filename = 'togglr.yml'
+      @authorative_repository = 'Togglr::YamlRepository'
+      @repositories = ['Togglr::YamlRepository']
+    end
+  end
 end
