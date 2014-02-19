@@ -10,7 +10,7 @@ module Togglr
       raise NotImplementedError
     end
 
-    def store(name)
+    def read_or_delegate(name)
       read(name) || write(name, yield)
     end
   end

@@ -1,7 +1,12 @@
 #encoding: utf-8
 
+require 'togglr/base_repository'
+
 module Togglr
   class YamlRepository < BaseRepository
+    require 'erb'
+    require 'yaml'
+
     attr_reader :features
 
     def initialize
@@ -10,11 +15,10 @@ module Togglr
 
     def read(name)
       @features[name]
-      
     end
 
     def write(name, value)
-      
+      # NOOP
     end
   end
 end
