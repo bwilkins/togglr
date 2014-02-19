@@ -1,23 +1,13 @@
 #encoding: utf-8
 
-require 'togglr/base_repository'
-
 module Togglr
-  class YamlRepository < BaseRepository
+  class YamlReader
     require 'erb'
     require 'yaml'
 
     def initialize(filename=nil)
       filename ||= Togglr.configuration.yaml_repository_filename
       @features = YAML.load(ERB.new(File.read(filename)).result).freeze
-    end
-
-    def read(name)
-      @features[name]
-    end
-
-    def write(name, value)
-      # NOOP
     end
 
     attr_reader :features

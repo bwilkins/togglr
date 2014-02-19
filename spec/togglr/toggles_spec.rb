@@ -2,7 +2,6 @@
 
 require_relative '../spec_helper'
 require 'togglr/toggles'
-require 'togglr/yaml_repository'
 
 module Togglr
   describe Toggles do

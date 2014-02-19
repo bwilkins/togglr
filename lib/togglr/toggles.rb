@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 require 'togglr/base_feature'
-require 'togglr/yaml_repository'
+require 'togglr/yaml_reader'
 
 module Togglr
   class Toggles
@@ -25,7 +25,7 @@ module Togglr
       end
 
       def self.authoritative_repository
-        get_class(Togglr.configuration.authoritative_repository).new
+        YamlReader.new
       end
 
       def self.repositories

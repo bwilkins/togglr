@@ -14,7 +14,6 @@ module Togglr
 
     def initialize
       @yaml_repository_filename = 'togglr.yml'
-      @authoritative_repository = 'Togglr::YamlRepository'
       @repositories = []
     end
   end

@@ -2,10 +2,10 @@
 
 require_relative '../spec_helper'
 
-require 'togglr/yaml_repository'
+require 'togglr/yaml_reader'
 
 module Togglr
-  describe YamlRepository do
+  describe YamlReader do
 
     let(:file_contents) {
       %Q{---
@@ -26,20 +26,15 @@ module Togglr
     end
 
     let(:filename) {temp_file.path}
-    let(:repo) {YamlRepository.new(filename)}
+    let(:repo) {YamlReader.new(filename)}
 
     it 'is not null' do
       expect(repo).to_not be_nil
     end
 
-    it 'returns state of feature' do
-      expect(repo.read(:true_feature)).to be_true
-      expect(repo.read(:false_feature)).to be_false
+    it 'returns features with initial state' do
+      expect(repo.features).to eq({true_feature: true, false_feature: false})
     end
 
-    it 'does nothing on write' do
-      repo.write(:true_feature, false)
-      expect(repo.read(:true_feature)).to_not be_false
-    end
   end
 end
