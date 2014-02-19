@@ -7,7 +7,7 @@ module Togglr
   class Toggles
 
     def self.register_features
-      authoritative_repository.features.each do |name, value|
+      features_source.features.each do |name, value|
         register_feature(name, value)
       end
     end
@@ -24,7 +24,7 @@ module Togglr
         end
       end
 
-      def self.authoritative_repository
+      def self.features_ source
         YamlReader.new
       end
 
