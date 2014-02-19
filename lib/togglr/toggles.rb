@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 require 'togglr/base_feature'
+require 'togglr/yaml_repository'
 
 module Togglr
   class Toggles
