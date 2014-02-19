@@ -29,7 +29,7 @@ module Togglr
     context 'with only default YAML repository' do
       before do
         Togglr.configure do |cfg|
-          cfg.yaml_repository_filename = temp_file.path
+          cfg.features_file = temp_file.path
         end
         Toggles.register_features
       end
@@ -43,7 +43,7 @@ module Togglr
     context 'with other repositories' do
       before do
         Togglr.configure do |cfg|
-          cfg.yaml_repository_filename = temp_file.path
+          cfg.features_file = temp_file.path
           cfg.repositories = ['Togglr::TestRepository1', 'Togglr::TestRepository2']
         end
         Toggles.register_features

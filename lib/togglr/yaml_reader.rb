@@ -6,7 +6,7 @@ module Togglr
     require 'yaml'
 
     def initialize(filename=nil)
-      filename ||= Togglr.configuration.yaml_repository_filename
+      filename ||= Togglr.configuration.features_file
       @features = YAML.load(ERB.new(File.read(filename)).result).freeze
     end
 

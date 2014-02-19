@@ -10,10 +10,10 @@ module Togglr
   end
 
   class Configuration
-    attr_accessor :yaml_repository_filename, :repositories, :authoritative_repository
+    attr_accessor :features_file, :repositories
 
     def initialize
-      @yaml_repository_filename = 'togglr.yml'
+      @features_file = 'togglr.yml'
       @repositories = []
     end
   end
