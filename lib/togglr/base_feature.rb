@@ -13,17 +13,19 @@ module Togglr
         default_value
       end
       repositories.reverse.inject(default) do |chained, repository|
-        Proc.new { repository.read_or_delegate(name, &chained) }
+        Proc.new do
+          repository.read_or_delegate(name, &chained)
+        end
       end.call
     end
 
     def active=(new_state)
       repositories.each do |repository|
-        repository.write(name, new_value)
+        repository.write(name, new_state)
       end
     end
 
     private
-      attr_accessor :default_value
+      attr_accessor :default_value, :repositories, :name
   end
 end

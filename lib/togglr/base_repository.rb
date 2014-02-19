@@ -12,7 +12,9 @@ module Togglr
     end
 
     def read_or_delegate(name)
-      read(name) || write(name, yield)
+      value = read(name)
+      value = write(name, yield) if value.nil?
+      value
     end
   end
 end

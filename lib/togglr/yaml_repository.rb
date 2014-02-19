@@ -9,7 +9,7 @@ module Togglr
 
     def initialize(filename=nil)
       filename ||= Togglr.configuration.yaml_repository_filename
-      @features = YAML.load(ERB.new(File.read(filename)).result)
+      @features = YAML.load(ERB.new(File.read(filename)).result).freeze
     end
 
     def read(name)
@@ -20,7 +20,6 @@ module Togglr
       # NOOP
     end
 
-    private
     attr_reader :features
   end
 end

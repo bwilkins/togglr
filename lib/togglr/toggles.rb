@@ -11,19 +11,18 @@ module Togglr
       end
     end
 
-    def self.register_feature(name, default_state)
-      f = BaseFeature.new(name, default_state, repositories)
-      define_method("#{name}?") do
-        f.active?
-      end
-
-      define_method("#{name}=") do |new_value|
-        f.active = new_value
-      end
-    end
-
-
     private
+      def self.register_feature(name, default_state)
+        f = BaseFeature.new(name, default_state, repositories)
+        define_singleton_method("#{name}?") do
+          f.active?
+        end
+
+        define_singleton_method("#{name}=") do |new_value|
+          f.active = new_value
+        end
+      end
+
       def self.authoritative_repository
         get_class(Togglr.configuration.authoritative_repository).new
       end
@@ -39,7 +38,5 @@ module Togglr
           mod.const_get(name)
         end
       end
-
-      register_features
   end
 end
