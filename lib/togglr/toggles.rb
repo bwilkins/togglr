@@ -6,18 +6,18 @@ module Togglr
   class Toggles
 
     def self.register_features
-      authoritative_repository.features.each do |feature|
-        register_feature(feature)
+      authoritative_repository.features.each do |name, value|
+        register_feature(name, value)
       end
     end
 
-    def self.register_feature(feature)
-      f = BaseFeature.new(feature[:name], feature[:default_state])
-      define_method("#{feature}?") do
+    def self.register_feature(name, default_state)
+      f = BaseFeature.new(name, default_state, repositories)
+      define_method("#{name}?") do
         f.active?
       end
 
-      define_method("#{feature}=") do |new_value|
+      define_method("#{name}=") do |new_value|
         f.active = new_value
       end
     end
@@ -25,19 +25,19 @@ module Togglr
 
     private
       def self.authoritative_repository
-        create_instance_of Togglr.configuration.authoritative_repository
+        get_class(Togglr.configuration.authoritative_repository).new
       end
 
-      def repositories
-        @repositories ||= Togglr.configuration.repositories.map do |repo|
-          create_instance_of repo
+      def self.repositories
+        Togglr.configuration.repositories.map do |repo|
+          get_class(repo).new
         end
       end
 
-      def create_instance_of class_name
+      def self.get_class(class_name)
         class_name.split('::').inject(Object) do |mod, name|
           mod.const_get(name)
-        end.new
+        end
       end
 
       register_features

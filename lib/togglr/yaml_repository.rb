@@ -7,10 +7,9 @@ module Togglr
     require 'erb'
     require 'yaml'
 
-    attr_reader :features
-
-    def initialize
-      @features = YAML.load(ERB.new(File.read(Togglr.configuration.yaml_repository_filename)))
+    def initialize(filename=nil)
+      filename ||= Togglr.configuration.yaml_repository_filename
+      @features = YAML.load(ERB.new(File.read(filename)).result)
     end
 
     def read(name)
@@ -20,5 +19,8 @@ module Togglr
     def write(name, value)
       # NOOP
     end
+
+    private
+    attr_reader :features
   end
 end

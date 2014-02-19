@@ -1,9 +1,5 @@
 #encoding: utf-8
 
-require 'togglr/version'
-require 'togglr/yaml_repository'
-require 'togglr/toggles'
-
 module Togglr
   def self.configuration
     @configuration ||= Configuration.new
@@ -23,3 +19,5 @@ module Togglr
     end
   end
 end
+
+require 'togglr/version'
