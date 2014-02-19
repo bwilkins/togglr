@@ -24,7 +24,7 @@ module Togglr
         end
       end
 
-      def self.features_ source
+      def self.features_source
         YamlReader.new
       end
 
