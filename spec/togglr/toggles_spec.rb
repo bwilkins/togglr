@@ -8,9 +8,12 @@ module Togglr
 
     let(:file_contents) do
       %q{---
-:true_feature: true
-:false_feature: false
-:some_feature: false
+:true_feature:
+  :value: true
+:false_feature:
+  :value: false
+:some_feature:
+  :value: false
 }
     end
 

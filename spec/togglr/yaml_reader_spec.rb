@@ -7,11 +7,14 @@ require 'togglr/yaml_reader'
 module Togglr
   describe YamlReader do
 
-    let(:file_contents) {
-      %Q{---
-:true_feature: true
-:false_feature: false}
-    }
+    let(:file_contents) do
+      %q{---
+:true_feature:
+  :value: true
+:false_feature:
+  :value: false
+}
+    end
 
     let(:temp_file) do
       t = Tempfile.new('yaml_repo')
@@ -33,7 +36,7 @@ module Togglr
     end
 
     it 'returns features with initial state' do
-      expect(repo.features).to eq({true_feature: true, false_feature: false})
+      expect(repo.features).to eq({true_feature: {value: true}, false_feature: {value: false}})
     end
 
   end

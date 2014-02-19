@@ -13,8 +13,8 @@ module Togglr
     end
 
     private
-      def self.register_feature(name, default_state)
-        f = BaseFeature.new(name, default_state, repositories)
+      def self.register_feature(name, properties)
+        f = BaseFeature.new(name, properties[:value], repositories)
         define_singleton_method("#{name}?") do
           f.active?
         end
