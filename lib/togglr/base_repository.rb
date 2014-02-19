@@ -2,6 +2,7 @@
 
 module Togglr
   class BaseRepository
+
     def read(name)
       raise NotImplementedError
     end
