@@ -8,12 +8,13 @@ module Togglr
 
     let(:file_contents) do
       %q{---
-:true_toggle:
-  :value: true
-:false_toggle:
-  :value: false
-:some_toggle:
-  :value: false
+:category:
+  :true_toggle:
+    :value: true
+  :false_toggle:
+    :value: false
+  :some_toggle:
+    :value: false
 }
     end
 
