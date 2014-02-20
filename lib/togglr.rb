@@ -13,7 +13,7 @@ module Togglr
     attr_accessor :toggles_file, :repositories
 
     def initialize
-      @toggles_file = 'togglr.yml'
+      @toggles_file = File.join('config', 'togglr.yml')
       @repositories = []
     end
   end
