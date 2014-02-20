@@ -1,20 +1,20 @@
 #encoding: utf-8
 
-require 'togglr/base_feature'
+require 'togglr/base_toggle'
 require 'togglr/yaml_reader'
 
 module Togglr
   class Toggles
 
-    def self.register_features
-      features_source.features.each do |name, value|
-        register_feature(name, value)
+    def self.register_toggles
+      toggles_source.toggles.each do |name, value|
+        register_toggle(name, value)
       end
     end
 
     private
-      def self.register_feature(name, properties)
-        f = BaseFeature.new(name, properties[:value], repositories)
+      def self.register_toggle(name, properties)
+        f = BaseToggle.new(name, properties[:value], repositories)
         define_singleton_method("#{name}?") do
           f.active?
         end
@@ -24,8 +24,8 @@ module Togglr
         end
       end
 
-      def self.features_source
-        YamlReader.new
+      def self.toggles_source
+        YamlReader.new(Togglr.configuration.toggles_file)
       end
 
       def self.repositories

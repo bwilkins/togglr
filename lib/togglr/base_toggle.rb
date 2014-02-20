@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 module Togglr
-  class BaseFeature
+  class BaseToggle
     def initialize(name, default_value, repositories)
       @name = name
       @default_value = default_value

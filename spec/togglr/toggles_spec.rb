@@ -8,11 +8,11 @@ module Togglr
 
     let(:file_contents) do
       %q{---
-:true_feature:
+:true_toggle:
   :value: true
-:false_feature:
+:false_toggle:
   :value: false
-:some_feature:
+:some_toggle:
   :value: false
 }
     end
@@ -32,29 +32,29 @@ module Togglr
     context 'with only default YAML repository' do
       before do
         Togglr.configure do |cfg|
-          cfg.features_file = temp_file.path
+          cfg.toggles_file = temp_file.path
         end
-        Toggles.register_features
+        Toggles.register_toggles
       end
 
-      it 'returns configured features state' do
-        expect(Toggles.true_feature?).to be_true
-        expect(Toggles.false_feature?).to be_false
+      it 'returns configured toggles state' do
+        expect(Toggles.true_toggle?).to be_true
+        expect(Toggles.false_toggle?).to be_false
       end
     end
 
     context 'with other repositories' do
       before do
         Togglr.configure do |cfg|
-          cfg.features_file = temp_file.path
+          cfg.toggles_file = temp_file.path
           cfg.repositories = ['Togglr::TestRepository1', 'Togglr::TestRepository2']
         end
-        Toggles.register_features
+        Toggles.register_toggles
       end
 
-      it 'returns feature state as stored by repository' do
-        expect(Toggles.true_feature?).to be_false
-        expect(Toggles.false_feature?).to be_true
+      it 'returns toggle state as stored by repository' do
+        expect(Toggles.true_toggle?).to be_false
+        expect(Toggles.false_toggle?).to be_true
       end
 
     end # context 'with other repositories'
@@ -63,19 +63,19 @@ module Togglr
 
   class TestRepository1 < BaseRepository
     def initialize
-      @features = {}
+      @toggles = {}
     end
 
     def read(name)
-      features[name]
+      toggles[name]
     end
 
     def write(name, new_value)
-      features[name] = new_value
+      toggles[name] = new_value
     end
 
     private
-    attr_accessor :features
+    attr_accessor :toggles
   end
 
   class TestRepository2 < TestRepository1

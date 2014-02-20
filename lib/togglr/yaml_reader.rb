@@ -5,11 +5,10 @@ module Togglr
     require 'erb'
     require 'yaml'
 
-    def initialize(filename=nil)
-      filename ||= Togglr.configuration.features_file
-      @features = YAML.load(ERB.new(File.read(filename)).result).freeze
+    def initialize(filename)
+      @toggles = YAML.load(ERB.new(File.read(filename)).result).freeze
     end
 
-    attr_reader :features
+    attr_reader :toggles
   end
 end

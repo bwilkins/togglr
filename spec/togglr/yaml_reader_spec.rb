@@ -9,9 +9,9 @@ module Togglr
 
     let(:file_contents) do
       %q{---
-:true_feature:
+:true_toggle:
   :value: true
-:false_feature:
+:false_toggle:
   :value: false
 }
     end
@@ -35,8 +35,8 @@ module Togglr
       expect(repo).to_not be_nil
     end
 
-    it 'returns features with initial state' do
-      expect(repo.features).to eq({true_feature: {value: true}, false_feature: {value: false}})
+    it 'returns toggles with initial state' do
+      expect(repo.toggles).to eq({true_toggle: {value: true}, false_toggle: {value: false}})
     end
 
   end

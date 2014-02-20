@@ -10,10 +10,10 @@ module Togglr
   end
 
   class Configuration
-    attr_accessor :features_file, :repositories
+    attr_accessor :toggles_file, :repositories
 
     def initialize
-      @features_file = 'togglr.yml'
+      @toggles_file = 'togglr.yml'
       @repositories = []
     end
   end
