@@ -15,7 +15,7 @@ module Togglr
     :value: false
   :some_toggle:
     :value: false
-}
+      }
     end
 
     let(:temp_file) do
@@ -30,14 +30,25 @@ module Togglr
       temp_file.unlink
     end
 
-    context 'with only default YAML repository' do
-      before do
-        Togglr.configure do |cfg|
-          cfg.toggles_file = temp_file.path
-        end
-        Toggles.register_toggles
+    before do
+      Togglr.configure do |cfg|
+        cfg.toggles_file = temp_file.path
       end
+      Toggles.register_toggles
+    end
 
+    describe 'public interface' do
+      it 'has a predicate getter and value setter for each toggle configured' do
+        expect(Toggles).to respond_to(:true_toggle?)
+        expect(Toggles).to respond_to(:false_toggle?)
+        expect(Toggles).to respond_to(:some_toggle?)
+        expect(Toggles).to respond_to(:true_toggle=)
+        expect(Toggles).to respond_to(:false_toggle=)
+        expect(Toggles).to respond_to(:some_toggle=)
+      end
+    end
+
+    context 'with only default YAML repository' do
       it 'returns configured toggles state' do
         expect(Toggles.true_toggle?).to be_true
         expect(Toggles.false_toggle?).to be_false
