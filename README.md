@@ -51,3 +51,19 @@ Use the repositories configuration to decide which repositories you want. List a
 
   ...
 ```
+
+## Usage
+To check for a toggle state use the toggle name predicate, eg: `Togglr::Toggles.feature?` 
+
+
+## BYO
+You can use your own repository implementation as long as it responds to the following messages:
+```
+read(toggle_name) : bool
+write(toggle_name, toggle_value) : bool
+```
+
+## TODOs
+
+- add redis repository
+- add request store repository
