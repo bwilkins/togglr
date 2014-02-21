@@ -8,13 +8,14 @@ module Togglr
     class Repository < Togglr::BaseRepository
 
       def read(name)
-        toggle = Togglr::ActiveRecord::Toggle.find_by(name: name)
+        toggle = Togglr::ActiveRecord::Toggle.get(name)
         return toggle.value if toggle.present?
         nil
       end
+
       def write(name, new_value)
-        Togglr::ActiveRecord::Toggle.find_or_initialize_by(name: name).update_attribute(:value, new_value)
-        new_value
+        toggle = Togglr::ActiveRecord::Toggle.set(name, new_value)
+        toggle.value
       end
 
     end
