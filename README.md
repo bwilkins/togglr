@@ -27,10 +27,12 @@ Togglr::Toggles.register_toggles
 
 By default the config file is supposed to be in config directory, named togglr.yml
 
+Make sure each toggle has a unique name. Duplicate toggles are disallowed.
+
 Use the repositories configuration to decide which repositories you want. List as array of comma separated class name strings.
 
 ### Toggles File Format
-```
+```yaml
 ---
 :category_name:
   :toggle_1:
@@ -41,4 +43,19 @@ Use the repositories configuration to decide which repositories you want. List a
 
   ...
 ```
+
+## Rails Repository
+In order to use the ActiveRecord Repository (in a rails 3/4 app - obviously)
+
+- configure the repositories to use:
+```rb
+config.repositories = ['Togglr::ActiveRecord::Repository']
+```
+- run the generator to generate migration which will create the table for persisting toggles' state:
+```sh
+rails generate togglr:active_record
+```
+- inspect the generated migration (in db/migrate/???_create_togglr_toggles.rb) and run it
+```rake
+rake db:migrate
 ```
