@@ -9,7 +9,10 @@ class CreateTogglrToggles < ActiveRecord::Migration
       t.timestamps
     end
 
-    execute 'ALTER TABLE togglr_toggles ADD PRIMARY KEY (name)'
+    if ActiveRecord::Base.connection. == 'sqlite3'
+      execute 'ALTER TABLE togglr_toggles ADD PRIMARY KEY (name)'
+    end
+
     add_index :togglr_toggles, :name, :unique => true
   end
 
