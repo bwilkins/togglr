@@ -49,18 +49,15 @@ module Togglr
             expect(Togglr::Toggles.true_toggle?).to be_true
           end
         end
+      end
 
-        context 'value in the database' do
-          it 'returns the value from the database' do
-            expect(Togglr::Toggles.true_toggle?).to be_true
-            Togglr::Toggles.true_toggle = false
-            expect(Togglr::Toggles.true_toggle?).to be_false
-          end
+      describe '#<toggle_name>=' do
+        it 'returns the value from the database' do
+          expect(Togglr::Toggles.true_toggle?).to be_true
+          Togglr::Toggles.true_toggle = false
+          expect(Togglr::Toggles.true_toggle?).to be_false
         end
       end
     end
   end
-
-
-end # module Togglr
-
+end
