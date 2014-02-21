@@ -29,7 +29,7 @@ By default the config file is supposed to be in config directory, named togglr.y
 
 You can add these basic config files with `rails generate togglr:install`
 
-Make sure each toggle has a unique name. Duplicate toggles are disallowed.
+Make sure each toggle has a UNIQUE name. Duplicate toggles are disallowed. The last toggle with the same name wins - irrespective of its category.
 
 Use the repositories configuration to decide which repositories you want. List as array of comma separated class name strings.
 
