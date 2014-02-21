@@ -9,6 +9,7 @@ module Togglr
     desc "This generator creates an intializer for Togglr"
     def generate_initializer
       template('initializer.rb', 'config/initializers/togglr.rb')
+      template('togglr.yml', 'config/togglr.yml')
     end
   end
 end

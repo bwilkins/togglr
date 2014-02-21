@@ -27,6 +27,8 @@ Togglr::Toggles.register_toggles
 
 By default the config file is supposed to be in config directory, named togglr.yml
 
+You can add these basic config files with `rails generate togglr:install`
+
 Make sure each toggle has a unique name. Duplicate toggles are disallowed.
 
 Use the repositories configuration to decide which repositories you want. List as array of comma separated class name strings.
