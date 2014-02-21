@@ -9,6 +9,14 @@ GEM for feature toggling
 1. Run `bundle install`
 1. Run `bundle exec rails generate togglr:install` to generate a default initialiser and toggles yml file
 
+## ActiveRecord Repository
+In order to use the ActiveRecord Repository (in a rails 3/4 app - obviously)
+
+1. run the generator to generate migration which will create the table for persisting toggles' state: `bundle exec rails generate togglr:active_record`
+1. inspect the generated migration (in `db/migrate/???_create_togglr_toggles.rb`) and run: `bundle exec rake db:migrate`
+1. Add to the repositories list in the initialiser: `config.repositories = ['Togglr::ActiveRecord::Repository']`
+
+
 ## Config
 
 ```
@@ -43,10 +51,3 @@ Use the repositories configuration to decide which repositories you want. List a
 
   ...
 ```
-
-## ActiveRecord Repository
-In order to use the ActiveRecord Repository (in a rails 3/4 app - obviously)
-
-1. run the generator to generate migration which will create the table for persisting toggles' state: `bundle exec rails generate togglr:active_record`
-1. inspect the generated migration (in `db/migrate/???_create_togglr_toggles.rb`) and run: `bundle exec rake db:migrate`
-1. Add to the repositories list in the initialiser: `config.repositories = ['Togglr::ActiveRecord::Repository']`
