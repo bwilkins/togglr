@@ -6,7 +6,6 @@ module Togglr
   module ActiveRecord
     class Toggle < ::ActiveRecord::Base
       self.table_name = 'togglr_toggles'
-      self.primary_key = 'name'
 
       validates_presence_of :name
       validates_uniqueness_of :name
