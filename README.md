@@ -9,7 +9,15 @@ GEM for feature toggling
 1. Run `bundle install`
 1. Run `bundle exec rails generate togglr:install` to generate a default initialiser and toggles yml file
 
-## ActiveRecord Repository
+## Using Toggles
+
+Toggles in Togglr must be defined in the togglr.yml file. If not in this file, they will not exist and trying to read them would be an error.
+
+Read value of toggle\_name: `Togglr::Toggles.toggle_name?`
+    
+Set value of toggle\_name: `Togglr::Toggles.toggl_name = false`
+
+## ActiveRecord Repository Setup
 In order to use the ActiveRecord Repository (in a rails 3/4 app - obviously)
 
 1. run the generator to generate migration which will create the table for persisting toggles' state: `bundle exec rails generate togglr:active_record`
