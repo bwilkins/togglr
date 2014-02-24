@@ -14,7 +14,7 @@ GEM for feature toggling
 Toggles in Togglr must be defined in the togglr.yml file. If not in this file, they will not exist and trying to read them would be an error.
 
 Read value of toggle\_name: `Togglr::Toggles.toggle_name?`
-    
+
 Set value of toggle\_name: `Togglr::Toggles.toggl_name = false`
 
 ## ActiveRecord Repository Setup
@@ -34,6 +34,7 @@ require 'togglr/toggles'
 Togglr.configure do |config|
   config.toggles_file = File.expand_path(File.join(Rails.root, 'config', 'togglr.yml'))
   config.repositories = []
+  config.logger = Rails.logger
 end
 
 Togglr::Toggles.register_toggles
@@ -46,6 +47,8 @@ You can add these basic config files with `rails generate togglr:install`
 Make sure each toggle has a UNIQUE name. Duplicate toggles are disallowed. The last toggle with the same name wins - irrespective of its category.
 
 Use the repositories configuration to decide which repositories you want. List as array of comma separated class name strings.
+
+Specify your own logger implementation (if you don't like Rails.logger - which will be the default in Rails app if you don't specify anything). The logger should respond to 'info'. It will log messages about state changes of toggles.
 
 ### Toggles File Format
 ```yaml
@@ -61,7 +64,7 @@ Use the repositories configuration to decide which repositories you want. List a
 ```
 
 ## Usage
-To check for a toggle state use the toggle name predicate, eg: `Togglr::Toggles.feature?` 
+To check for a toggle state use the toggle name predicate, eg: `Togglr::Toggles.feature?`
 
 
 ## BYO
