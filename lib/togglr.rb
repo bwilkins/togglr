@@ -19,6 +19,7 @@ module Togglr
     def initialize
       @toggles_file = File.join('config', 'togglr.yml')
       @repositories = []
+      @logger = Rails.logger if defined?(Rails)
     end
   end
 end
