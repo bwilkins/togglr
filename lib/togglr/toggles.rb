@@ -1,5 +1,6 @@
 #encoding: utf-8
 
+require 'singleton'
 require 'togglr/base_toggle'
 require 'togglr/yaml_reader'
 
