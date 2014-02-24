@@ -20,6 +20,7 @@ module Togglr
     end
 
     def active=(new_state)
+      Togglr.log("Toggle #{name} was switched #{new_state ? 'on' : 'off'} togglr_toggle_changed=#{name} #{new_state}=#{Time.now}")
       repositories.each do |repository|
         repository.write(name, new_state)
       end
