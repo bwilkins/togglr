@@ -5,6 +5,7 @@ require 'togglr/yaml_reader'
 
 module Togglr
   class Toggles
+    include Singleton
 
     def self.register_toggles
       toggles_source.toggles.each do |name, value|
@@ -12,9 +13,18 @@ module Togglr
       end
     end
 
+    def self.each(&block)
+      instance.toggles.each(&block)
+    end
+
+    def toggles
+      @toggles ||= []
+    end
+
     private
       def self.register_toggle(name, properties)
         f = BaseToggle.new(name, properties[:value], repositories)
+        instance.toggles << f
         define_singleton_method("#{name}?") do
           f.active?
         end

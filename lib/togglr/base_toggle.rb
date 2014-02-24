@@ -2,6 +2,8 @@
 
 module Togglr
   class BaseToggle
+    attr_reader :name
+
     def initialize(name, default_value, repositories)
       @name = name
       @default_value = default_value
@@ -27,6 +29,6 @@ module Togglr
     end
 
     private
-      attr_accessor :default_value, :repositories, :name
+      attr_reader :default_value, :repositories
   end
 end

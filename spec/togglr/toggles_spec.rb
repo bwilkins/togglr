@@ -30,6 +30,10 @@ module Togglr
       temp_file.unlink
     end
 
+    after do
+      Toggles.instance.toggles.clear
+    end
+
     before do
       Togglr.configure do |cfg|
         cfg.toggles_file = temp_file.path
@@ -45,6 +49,7 @@ module Togglr
         expect(Toggles).to respond_to(:true_toggle=)
         expect(Toggles).to respond_to(:false_toggle=)
         expect(Toggles).to respond_to(:some_toggle=)
+        expect(Toggles).to respond_to(:each)
       end
     end
 
@@ -52,6 +57,14 @@ module Togglr
       it 'returns configured toggles state' do
         expect(Toggles.true_toggle?).to be_true
         expect(Toggles.false_toggle?).to be_false
+      end
+
+      describe '#each' do
+        it 'executes a block for each toggle configured' do
+          my_number = 0
+          Toggles.each {|t| my_number +=1 }
+          expect(my_number).to eq(Toggles.instance.toggles.count)
+        end
       end
     end
 
