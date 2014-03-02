@@ -1,7 +1,8 @@
-#encoding: utf-8
+# encoding: utf-8
 
 require_relative '../spec_helper'
 require 'togglr/toggles'
+require 'togglr/base_repository'
 
 module Togglr
   describe Toggles do
@@ -19,10 +20,10 @@ module Togglr
     end
 
     let(:temp_file) do
-      t = Tempfile.new('yaml_repo')
-      t.write(file_contents)
-      t.rewind
-      t
+      Tempfile.new('yaml_repo').tap do |file|
+        file.write(file_contents)
+        file.rewind
+      end
     end
 
     after do

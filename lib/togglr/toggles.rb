@@ -23,6 +23,7 @@ module Togglr
     end
 
     private
+
       def self.register_toggle(name, properties)
         f = BaseToggle.new(name, properties[:value], repositories)
         instance.toggles << f
