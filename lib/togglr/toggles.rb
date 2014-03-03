@@ -13,6 +13,12 @@ module Togglr
       end
     end
 
+    def self.test_mode!
+      instance.toggles.clear
+      Togglr.configuration.test_mode!
+      register_toggles
+    end
+
     def self.each(&block)
       instance.toggles.each(&block)
     end
