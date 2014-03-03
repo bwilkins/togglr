@@ -14,12 +14,20 @@ module Togglr
   end
 
   class Configuration
-    attr_accessor :toggles_file, :repositories, :logger
+    attr_accessor :toggles_file, :repositories, :logger, :test_mode
 
     def initialize
       @toggles_file = File.join('config', 'togglr.yml')
       @repositories = []
       @logger = Rails.logger if defined?(Rails)
+    end
+
+    def test_mode?
+      @test_mode ||= false
+    end
+
+    def test_mode!
+      @test_mode = true
     end
   end
 end

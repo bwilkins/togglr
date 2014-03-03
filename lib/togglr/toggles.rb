@@ -1,7 +1,6 @@
 #encoding: utf-8
 
 require 'singleton'
-require 'togglr/base_toggle'
 require 'togglr/yaml_reader'
 
 module Togglr
@@ -25,7 +24,7 @@ module Togglr
     private
 
       def self.register_toggle(name, properties)
-        f = BaseToggle.new(name, properties[:value], repositories)
+        f = toggle_class.new(name, properties[:value], repositories)
         instance.toggles << f
         define_singleton_method("#{name}?") do
           f.active?
@@ -33,6 +32,16 @@ module Togglr
 
         define_singleton_method("#{name}=") do |new_value|
           f.active = new_value
+        end
+      end
+
+      def self.toggle_class
+        if Togglr.configuration.test_mode?
+          require 'togglr/test_toggle'
+          TestToggle
+        else
+          require 'togglr/base_toggle'
+          BaseToggle
         end
       end
 
