@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+def find_rails_environment
+  pwd = Dir.pwd
+  loop do
+    check_path = File.join(pwd, 'config', 'environment.rb')
+    return check_path if File.exists? check_path
+    pwd = File.expand_path('..', pwd)
+    break if pwd == '/'
+  end
+
+  nil
+end
+
+rails_env = find_rails_environment
+if rails_env.nil?
+  puts "Could not find Rails environment!"
+  exit(1)
+end
+
+require rails_env
+require 'thor'
+
+module ToggleCLI
+  class Toggle < Thor
+
+    desc "states", "Shows the current state of all toggles"
+    def states
+      Togglr::Toggles.each do |toggle|
+        puts %Q(#{toggle.name}: #{(toggle.active? ? "on" : "off")})
+      end
+    end
+
+    Togglr::Toggles.each do |toggle|
+      klass = Class.new(Thor) do
+        no_commands {
+          cattr_accessor :toggle
+          self.toggle = toggle
+
+          def self.to_s
+            "ToggleCLI::#{toggle.name}"
+          end
+        }
+
+        desc "#{toggle.name} [on|off|state]", "manage state of toggles"
+        desc "on", "Toggle on the #{toggle.name} feature"
+        def on
+          toggle.active = true
+        end
+
+        desc "off", "Toggle off the #{toggle.name} feature"
+        def off
+          toggle.active = false
+        end
+
+        desc "state", "Shows the current state of the #{toggle.name} toggle"
+        def state
+          puts toggle.active? ? "on" : "off"
+        end
+      end
+
+      #register(klass, "#{toggle.name}", "#{toggle.name} [on|off|state]", "manage state of toggles")
+      desc "#{toggle.name} [on|off|state]", "manage state of toggles"
+      subcommand "#{toggle.name}", klass
+    end
+  end
+end
+
+ToggleCLI::Toggle.start(ARGV)
