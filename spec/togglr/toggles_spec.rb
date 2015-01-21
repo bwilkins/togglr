@@ -1,6 +1,3 @@
-# encoding: utf-8
-
-require_relative '../spec_helper'
 require 'togglr/toggles'
 require 'togglr/base_repository'
 
@@ -56,8 +53,8 @@ module Togglr
 
     context 'with only default YAML repository' do
       it 'returns configured toggles state' do
-        expect(Toggles.true_toggle?).to be_true
-        expect(Toggles.false_toggle?).to be_false
+        expect(Toggles.true_toggle?).to be(true)
+        expect(Toggles.false_toggle?).to be(false)
       end
 
       describe '#each' do
@@ -79,8 +76,8 @@ module Togglr
       end
 
       it 'returns toggle state as stored by repository' do
-        expect(Toggles.true_toggle?).to be_false
-        expect(Toggles.false_toggle?).to be_true
+        expect(Toggles.true_toggle?).to be(false)
+        expect(Toggles.false_toggle?).to be(true)
       end
 
     end # context 'with other repositories'

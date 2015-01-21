@@ -1,6 +1,3 @@
-#encoding: utf-8
-
-require_relative '../../spec_helper'
 require_relative '../../support/active_record'
 require 'togglr/toggles'
 require 'togglr/active_record/toggle'
@@ -17,13 +14,13 @@ module Togglr
 
         context 'database entry exists' do
           it 'returns a Toggle object' do
-            expect(described_class.get('my_toggle')).to eq toggle
+            expect(described_class.get('my_toggle')).to eq(toggle)
           end
         end
 
         context 'no database entry exists' do
           it 'returns nil' do
-            expect(described_class.get('foobar')).to be_nil
+            expect(described_class.get('foobar')).to be(nil)
           end
         end
       end
@@ -31,11 +28,11 @@ module Togglr
       describe '.set' do
         context 'with no database entry' do
           it 'creates a new database entry with specified value' do
-            expect(Toggle.get('foobar')).to be_nil
+            expect(Toggle.get('foobar')).to be(nil)
             t = Toggle.set('foobar', true)
             expect(t).to be_persisted
-            expect(t.value).to be_true
-            expect(Toggle.get('foobar').value).to be_true
+            expect(t.value).to be(true)
+            expect(Toggle.get('foobar').value).to be(true)
           end
         end
 
@@ -47,11 +44,11 @@ module Togglr
           end
 
           it 'returns the existing entry with new value set' do
-            expect(Toggle.get('my_toggle2').value).to be_false
+            expect(Toggle.get('my_toggle2').value).to be(false)
             t = Toggle.set('my_toggle2', true)
             expect(t).to be_persisted
-            expect(t.value).to be_true
-            expect(Toggle.get('my_toggle2').value).to be_true
+            expect(t.value).to be(true)
+            expect(Toggle.get('my_toggle2').value).to be(true)
           end
         end
       end

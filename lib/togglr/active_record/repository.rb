@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 require 'togglr/base_repository'
 require 'togglr/active_record/toggle'
 

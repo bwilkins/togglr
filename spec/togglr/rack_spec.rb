@@ -7,7 +7,7 @@ describe Togglr::RackAPI do
     @app ||= Togglr::RackAPI.new
   end
 
-  it "should respond to /" do
+  it 'should respond to /' do
     get '/'
     expect(last_response).to be_ok
     expect(last_response.body).to eq '{}'
@@ -33,6 +33,5 @@ describe Togglr::RackAPI do
       expect(last_response.body).to eq toggles.to_json
     end
   end
-
 end
 

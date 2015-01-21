@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 module Togglr
   def self.configuration
     @configuration ||= Configuration.new
