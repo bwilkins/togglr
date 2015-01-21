@@ -1,4 +1,7 @@
+require 'rack/test'
+require 'togglr'
 require 'togglr/rack'
+require 'togglr/toggles'
 
 describe Togglr::RackAPI do
   include Rack::Test::Methods
@@ -14,19 +17,13 @@ describe Togglr::RackAPI do
   end
 
   context 'when there are toggles' do
-    let(:file_contents) do
-      %q{---
-:category:
-  :true_toggle:
-    :value: true
-  :false_toggle:
-    :value: false
-  :some_toggle:
-    :value: false
-      }
+
+    let(:toggles) { { toggle_one: { value: true }, toggle_two: { value: false } } }
+
+    before do
+      Togglr::Toggles.register_toggles(toggles)
     end
 
-    let(:toggles) { {'test_toggle' => 'ok' } }
     it 'contains the toggles and their values' do
       get '/'
       expect(last_response).to be_ok
