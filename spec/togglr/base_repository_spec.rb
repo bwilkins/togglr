@@ -1,6 +1,3 @@
-#encoding: utf-8
-
-require_relative '../spec_helper'
 require 'togglr/base_repository'
 
 module Togglr

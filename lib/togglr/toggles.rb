@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 require 'singleton'
 require 'togglr/yaml_reader'
 
@@ -7,8 +5,8 @@ module Togglr
   class Toggles
     include Singleton
 
-    def self.register_toggles
-      toggles_source.toggles.each do |name, value|
+    def self.register_toggles(toggles=toggles_source.toggles)
+      toggles.each do |name, value|
         register_toggle(name, value)
       end
     end
@@ -52,7 +50,7 @@ module Togglr
       end
 
       def self.toggles_source
-        YamlReader.new(Togglr.configuration.toggles_file)
+        @toggles_source ||= YamlReader.new(Togglr.configuration.toggles_file)
       end
 
       def self.repositories

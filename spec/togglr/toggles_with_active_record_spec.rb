@@ -1,6 +1,3 @@
-#encoding: utf-8
-
-require_relative '../spec_helper'
 require_relative '../support/active_record'
 require 'togglr/toggles'
 require 'togglr/active_record/repository'
@@ -46,16 +43,16 @@ module Togglr
       describe '#<toggle_name>?' do
         context 'no value in database' do
           it 'returns the toggle value from the yaml file' do
-            expect(Togglr::Toggles.true_toggle?).to be_true
+            expect(Togglr::Toggles.true_toggle?).to be(true)
           end
         end
       end
 
       describe '#<toggle_name>=' do
         it 'returns the value from the database' do
-          expect(Togglr::Toggles.true_toggle?).to be_true
+          expect(Togglr::Toggles.true_toggle?).to be(true)
           Togglr::Toggles.true_toggle = false
-          expect(Togglr::Toggles.true_toggle?).to be_false
+          expect(Togglr::Toggles.true_toggle?).to be(false)
         end
       end
     end

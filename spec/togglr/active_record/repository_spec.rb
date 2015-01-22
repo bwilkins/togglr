@@ -1,6 +1,3 @@
-#encoding: utf-8
-
-require_relative '../../spec_helper'
 require_relative '../../support/active_record'
 require 'togglr/toggles'
 require 'togglr/active_record/repository'
@@ -19,15 +16,15 @@ module Togglr
           it 'returns the corresponding value from the repository' do
             Toggle.new.tap{|t| t.name = 'foobar'; t.value = true}.save!
 
-            expect(described_class.new.read('foobar')).to be_true
+            expect(described_class.new.read('foobar')).to be(true)
           end
         end
       end
 
       describe '#write' do
         it 'returns the value written to repository' do
-          expect(described_class.new.write('foobar', true)).to be_true
-          expect(described_class.new.write('foobar', false)).to be_false
+          expect(described_class.new.write('foobar', true)).to be(true)
+          expect(described_class.new.write('foobar', false)).to be(false)
         end
       end
     end
