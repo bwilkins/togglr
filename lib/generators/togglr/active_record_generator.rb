@@ -9,7 +9,7 @@ module Togglr
 
     source_root File.expand_path('./templates', File.dirname(__FILE__))
 
-    desc "This generator creates a migration for persisting feature toggles via Active Record"
+    desc 'This generator creates a migration for persisting feature toggles via Active Record'
     def generate_migration
       migration_template('migration.rb', 'db/migrate/create_togglr_toggles.rb')
     end

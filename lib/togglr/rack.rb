@@ -9,7 +9,7 @@ module Togglr
       end
 
       body = toggles.to_json
-      [200, {"Content-Type" => "text/javascript", "Content-Length" => body.length.to_s}, [body]]
+      [200, { 'Content-Type' => 'text/javascript', 'Content-Length' => body.length.to_s}, [body]]
     end
   end
 end

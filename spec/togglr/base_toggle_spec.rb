@@ -54,7 +54,7 @@ module Togglr
           it 'ignores any values from deeper repositories' do
             test_repo1.toggles[toggle_name] = toggle_value
             test_repo2.toggles[toggle_name] = !toggle_value
-            test_repo2.should_not_receive(:read_or_delegate)
+            expect(test_repo2).to_not receive(:read_or_delegate)
 
             expect(toggle.active?).to eq toggle_value
           end
