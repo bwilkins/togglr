@@ -10,7 +10,6 @@ module Togglr
     let(:toggle) { BaseToggle.new(toggle_name, toggle_value, repositories) }
 
 
-
     describe '#active?' do
       context 'without any repositories' do
         it 'returns the default value' do
@@ -81,6 +80,23 @@ module Togglr
         end
       end
 
+    end
+
+    describe '#description' do
+      let(:toggle_value) { { value: true, description: description } }
+      context 'when supplied a description' do
+        let(:description) {  'This is the description' }
+        it 'returns the given description' do
+          expect(toggle.description).to eq description
+        end
+      end
+
+      context 'when not supplied a description' do
+        let(:description) { nil }
+        it 'returns a default description' do
+          expect(toggle.description).to_not eq description
+        end
+      end
     end
 
   end

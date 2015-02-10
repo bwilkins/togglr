@@ -8,6 +8,7 @@ module Togglr
 :category:
   :true_toggle:
     :value: true
+    :description: desc
   :false_toggle:
     :value: false
 }
@@ -35,7 +36,7 @@ module Togglr
     describe '#toggles' do
 
       it 'returns toggles with initial state' do
-        expect(yaml_reader.toggles).to eq({true_toggle: {value: true, category: :category}, false_toggle: {value: false, category: :category}})
+        expect(yaml_reader.toggles).to eq({true_toggle: {value: true, category: :category, description: 'desc'}, false_toggle: {value: false, category: :category}})
       end
 
       it 'returns a hash' do
@@ -82,4 +83,5 @@ module Togglr
     end
 
   end
+
 end
