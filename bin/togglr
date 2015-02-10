@@ -42,7 +42,7 @@ module ToggleCLI
           end
         }
 
-        desc "#{toggle.name} [on|off|state]", 'manage state of toggles'
+        desc "#{toggle.name} [on|off|state]", (toggle.description || 'manage state of toggles')
         desc 'on', "Toggle on the #{toggle.name} feature"
         def on
           toggle.active = true
@@ -57,10 +57,15 @@ module ToggleCLI
         def state
           puts toggle.active? ? 'on' : 'off'
         end
+
+        desc 'desc', "Shows the description of the #{toggle.name} toggle"
+        def description
+          puts toggle.description
+        end
       end
 
       #register(klass, "#{toggle.name}", "#{toggle.name} [on|off|state]", "manage state of toggles")
-      desc "#{toggle.name} [on|off|state]", 'manage state of toggles'
+      desc "#{toggle.name} [on|off|state]", (toggle.description || 'manage state of toggles')
       subcommand "#{toggle.name}", klass
     end
   end

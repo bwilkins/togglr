@@ -6,8 +6,8 @@ module Togglr
     include Singleton
 
     def self.register_toggles(toggles=toggles_source.toggles)
-      toggles.each do |name, value|
-        register_toggle(name, value)
+      toggles.each do |name, properties|
+        register_toggle(name, properties)
       end
     end
 
@@ -28,7 +28,7 @@ module Togglr
     private
 
       def self.register_toggle(name, properties)
-        f = toggle_class.new(name, properties[:value], repositories)
+        f = toggle_class.new(name, properties, repositories)
         instance.toggles << f
         define_singleton_method("#{name}?") do
           f.active?

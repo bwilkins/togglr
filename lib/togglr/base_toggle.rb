@@ -1,10 +1,17 @@
 module Togglr
   class BaseToggle
-    attr_reader :name
+    attr_reader :name, :description
 
-    def initialize(name, default_value, repositories)
+    def initialize(name, properties, repositories)
       @name = name
-      @default_value = default_value
+
+      if properties.is_a? Hash
+        @default_value = properties[:value] || false
+        @description = properties[:description] || "#{name} toggle"
+      else
+        @default_value = properties
+      end
+
       @repositories = repositories
     end
 
